@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Rock Paper Scissors</title>
+</head>
+
+<body>
+    <h1>Check your console to see result!</h1>
+    <hr>
+    <h3>Guide</h3>
+    <img src="https://upload.wikimedia.org/wikipedia/en/c/cc/Rock_paper_scissors_lizard_spock.png" alt="">
+    <script>
+        const newRandomMove = () => {
+            let validMoves = ['rock', 'paper', 'scissors', 'lizard', 'spock'];
+            return validMoves[Math.floor(Math.random() * 5)];
+        }
+
+        let computerMove = newRandomMove();
+        let userMove = prompt('rock, paper, scissors, lizard, spock');
+
+        const rockPaperScissorsLizardSpock = (computerMove, userMove) => {
+            let validMoves = ['rock', 'paper', 'scissors', 'lizard', 'spock'];
+
+            console.log(`Computer chose ${computerMove}...`);
+            console.log(`User chose ${userMove}...`);
+            console.log("=======================");
+
+            const rockArr = [
+                [0, 0],
+                [-1, 1],
+                [1, -1],
+                [1, -1],
+                [-1, 1]
+            ];
+            const paperArr = [
+                [1, -1],
+                [0, 0],
+                [-1, 1],
+                [-1, 1],
+                [1, -1]
+            ];
+            const scissorsArr = [
+                [-1, 1],
+                [1, -1],
+                [0, 0],
+                [1, -1],
+                [-1, 1]
+            ];
+            const lizardArr = [
+                [-1, 1],
+                [1, -1],
+                [-1, 1],
+                [0, 0],
+                [1, -1]
+            ];
+            const spockArr = [
+                [1, -1],
+                [-1, 1],
+                [1, -1],
+                [-1, 1],
+                [0, 0]
+            ];
+
+            const resultArr = [rockArr, paperArr, scissorsArr, lizardArr, spockArr];
+
+            let matchResult = [];
+
+            for (let i = 0; i < validMoves.length; i++) {
+                if (computerMove === validMoves[i]) {
+                    for (let j = 0; j < validMoves.length; j++) {
+                        if (userMove === validMoves[j]) {
+                            matchResult = resultArr[i][j];
+                        }
+                    }
+                }
+            }
+
+            // matchResult[0] --> computer
+            // matchResult[1] --> user
+            // so if matchResult == [1,-1], computer wins
+            // if matchResult == [-1,1], user wins
+            // if matchResult == [0,0], its a draw
+
+            if (matchResult[0] === 0 || matchResult[1] === 0) {
+                console.log("Result: It's a draw!");
+            } else if (matchResult[0] > matchResult[1]) {
+                console.log("Result: Computer wins!");
+            } else if (matchResult[0] < matchResult[1]) {
+                console.log("Result: User wins!");
+            } else {
+                console.log("Result: Inconclusive - Missing/Wrong Input")
+            }
+
+        }
+
+        rockPaperScissorsLizardSpock(computerMove, userMove);
+    </script>
+</body>
+
+</html>
